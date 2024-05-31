@@ -1,1 +1,7 @@
+class CalculatorView:
 
+    def display_result(self, result):
+        print(f"Result: {result}")
+
+    def display_chart(self, data):
+        pass
