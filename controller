@@ -1,1 +1,58 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from calculator_model import Calculator
+from calculator_view import CalculatorView
+
+
+class CalculatorController:
+
+    def __init__(self):
+        self.model = Calculator()
+        self.view = CalculatorView()
+
+    def run_calculator(self):
+        while True:
+            print("Select operation:")
+            print("1. Simple Calculator")
+            print("2. Area Calculator")
+            print("3. Perimeter Calculator")
+            print("4. Volume Calculator")
+            print("5. Display Chart")
+            print("q. Quit")
+
+            choice = input("Enter choice: ")
+
+            if choice == "q":
+                break
+            elif choice == "1":
+                operation = input("Enter operation (+, -, *, /): ")
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+                result = self.model.simple_calculator(operation, num1, num2)
+                self.view.display_result(result)
+            elif choice == "2":
+                shape = input("Enter shape (circle, triangle, rectangle, square): ")
+                args = [float(arg) for arg in input("Enter values separated by space: ").split()]
+                result = self.model.calculate_area(shape, *args)
+                self.view.display_result(result)
+            elif choice == "3":
+                shape = input("Enter shape (circle, triangle, rectangle, square): ")
+                args = [float(arg) for arg in input("Enter values separated by space: ").split()]
+                result = self.model.calculate_perimeter(shape, *args)
+                self.view.display_result(result)
+            elif choice == "4":
+                shape = input("Enter shape (cube, rectangular_prism): ")
+                args = [float(arg) for arg in input("Enter values separated by space: ").split()]
+                result = self.model.calculate_volume(shape, *args)
+                self.view.display_result(result)
+            elif choice == "5":
+                data = {"x": [1, 2, 3, 4, 5], "y": [2, 3, 1, 4, 7]}
+                df = pd.DataFrame(data)
+                df.plot(x="x", y="y", kind="bar")
+                plt.show()
+
+
+if __name__ == "__main__":
+    controller = CalculatorController()
+    controller.run_calculator()
 
